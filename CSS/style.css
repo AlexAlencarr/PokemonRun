@@ -1,0 +1,115 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
+    background-color: #d2d2d2;
+}
+
+
+.gameScreen{
+    position: relative;
+
+    width: 600px;
+    height: 300px;
+
+    overflow: hidden;
+}
+
+.pikachu{
+    width: 80px;
+
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+}
+
+.background{
+    position: absolute;
+    width: 100%;
+
+    z-index: -99999;
+}
+
+.pokeball{
+    position: absolute;
+    bottom: 7px;
+    /* right: 55px; */
+    width: 28px;
+
+    animation: turn 1.5s linear infinite;
+}
+
+.ultraball{
+    position: absolute;
+    bottom: 12px;
+    /* right: 65px; */
+
+    width: 20px;
+
+    /* animation: turn 1s linear infinite; */
+    border-radius: 50%;
+}
+
+.masterball{
+    position: absolute;
+    bottom: 12px;
+    /* right: 56px; */
+
+    width: 20px;
+
+    /* animation: turn 0.6s linear infinite; */
+    border-radius: 50%;
+}
+
+.jump{
+    animation: jump 500ms ease-out;
+}
+
+@keyframes jump {
+    0% {
+        bottom: 0;
+    }
+
+    40% {
+        bottom: 60px;
+    }
+
+    50%{
+        bottom: 60px;
+    }
+
+    60%{
+        bottom: 60px;
+    }
+
+    70%{
+        bottom: 60px;
+    }
+
+    100%{
+        bottom: 0;
+    }
+
+}
+
+@keyframes turn {
+    100%{
+        transform: rotate(360deg);
+    }
+    from {
+        left: -45px;
+    }
+
+    to{
+        left: 98%;
+    }
+}
