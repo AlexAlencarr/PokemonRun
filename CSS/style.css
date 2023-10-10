@@ -59,6 +59,16 @@ body{
     border-radius: 50%;
 }
 
+.gameOver{
+    position: absolute;
+    right: -50px;
+    top: 0;
+    transform: translate(-50%,0%);
+    font-family: 'VT323' , sans-serif;
+    font-size: 2em;
+    color: #FFF;
+}
+
 .masterball{
     position: absolute;
     bottom: 12px;
