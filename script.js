@@ -93,3 +93,15 @@ const loop = setInterval(() => {
 const restartGame = () =>{
     window.location.reload();
 }
+
+//CASO SEJA APERTADO O "F5" VOLTA PARA A TELA DA CAPA DO JOGO
+document.addEventListener('keydown', function(press){
+    if (press.key === "F5"){
+        window.location.href = "index.html"
+    }
+})
+
+//FUNÇAO PARA SAIR DA CAPA DO JOGO E IR PARA O JOGO
+function start(){ 
+    window.location.href = "game.html";
+}
