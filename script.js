@@ -102,6 +102,6 @@ document.addEventListener('keydown', function(press){
 })
 
 //FUNÇAO PARA SAIR DA CAPA DO JOGO E IR PARA O JOGO
-function start(){ 
+const start = () => { 
     window.location.href = "game.html";
 }
