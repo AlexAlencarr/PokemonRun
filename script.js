@@ -52,7 +52,7 @@ const loop = setInterval(() => {
 
         //ESSA CONDIÇÃO TESTARÁ SE A POKEBOLA ESTÁ A UMA DETERMINADA POSIÇÃO EM RELAÇÃO À ESQUERDA E SE O POKÉMON ESTÁ A UMA DETERMINADA POSIÇÃO EM RELAÇÃO À PARTE INFERIOR DA TELA
         //CASO A POKEBOLA ESTEJA A 510 PIXELS DA ESQUERDA E, SIMULTANEAMENTE, O PIKACHU ESTEJA A MENOS QUE 20 PIXELS DO CHÃO, O JOGO SERÁ INTERROMPIDO
-        if ((pokeballPosition >= 510 && pikachuPosition < 20) || (ultraballPosition >= 510 && pikachuPosition < 20) || (masterballPosition >= 510 && pikachuPosition < 20)) {
+        if ((pokeballPosition >= 510 && pikachuPosition < 20) || (ultraballPosition >= 514 && pikachuPosition < 20) || (masterballPosition >= 514 && pikachuPosition < 20)) {
             //LINHAS DE CÓDIGO CRIADAS COM O OBJETIVO DE PARAR A ANIMAÇÃO DA POKEBOLA E FIXÁ-LA NA POSIÇÃO EM QUE TOCOU NO POKÉMON, VARIANDO CONFORME O TIPO DA POKEBOLA
             pokeball.style.animation = 'none';
             pokeball.style.left = `${pokeballPosition}px`;
