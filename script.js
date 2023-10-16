@@ -5,10 +5,13 @@ const ultraball = document.querySelector('.ultraball');
 const masterball = document.querySelector('.masterball');
 const gameOver = document.querySelector('.gameOver')
 const jumpClass = document.querySelector('.jump')
-const restartButton = document.querySelector('.restart');
+const restartButton = document.querySelector('.restart')
 
 //VARIÁVEL IMPLEMENTADA COM O OBJETIVO DE ARMAZENAR A PONTUAÇÃO OBTIDA PELO JOGADOR AO DECORRER DO TEMPO
 let score = 0;
+
+//VARIÁVEL IMPLEMENTADA COM O OBJETIVO DE GUARDAR A INFORMAÇÃO DE SE O JOGO ESTÁ ATIVO/INATIVO, FOI CRIADA POIS FOI A ÚNICA FORMA QUE CONSEGUIMOS DE PARAR A CONTAGEM DO SCORE APÓS O USUÁRIO PERDER
+let playing = true;
 
 //CÓDIGO DESENVOLVIDO PARA A REALIZAÇÃO DO MECANISMO DE PULO DO POKÉMON, EM QUE IRÁ SER ADICIONADA UMA CLASSE A UMA OUTRA CLASSE, FAZENDO COM QUE ACONTEÇA O PULO
 const jump = () => {
@@ -21,27 +24,21 @@ const jump = () => {
     }, 500);
 }
 
-
-//CÓDIGO PARA DESATIVAR AS TECLAS ALT E F12
-document.addEventListener("keydown", function(press) {
-    if (press.key === "Alt" || press.key === "F12") {
-        press.preventDefault(); 
-    }
-  });
-
-//CÓDIGO PARA O POKÉMON REALIZAR A MECÂNICA DE PULO
-document.addEventListener('keydown', jump);
-
-
-const loop = setInterval(() => {
+//CÓDIGO PRINCIPAL PARA O MECANISMO DO JOGO, NELE ESTÁ ARMAZENADO AS INFORMAÇÕES SOBRE O SCORE, AS POSIÇÕES RELATIVAS ÀS POKEBOLAS, A POSIÇÃO DO PIKACHU, ALÉM DO GERENCIAMENTO DAS ANIMAÇÕES DA TELA DO JOGO
+const loop = () => {
+    setTimeout(loop, 1000)
     //CÓDIGO EM QUE SERÁ GERADA A PONTUAÇÃO A SER VISUALIZADA NO CANTO SUPERIOR DIREITO DA TELA DO JOGO
-    const scoreCounter = setInterval(() => {
-        score += 1;
-        gameOver.innerHTML = 'Score: ' + score;
-        clearInterval(scoreCounter);
-        console.log(score)
-    }, 1000);  
-    const colisao = setInterval(() => {
+    const scoreCounter = () => {
+        if (playing) {
+            score += 1;
+            gameOver.innerHTML = 'Score: ' + score;
+            setTimeout(scoreCounter, 15000);
+        }
+    }
+    scoreCounter();
+
+    const collision = () => {
+        setTimeout(collision, 10)
         //CONSTANTES COM O INTUITO DE ARMAZENAR A POSIÇÃO RELATIVA DAS POKEBOLAS EM RELAÇÃO AO LADO ESQUERDO DA TELA
         const pokeballPosition = pokeball.offsetLeft;
         const ultraballPosition = ultraball.offsetLeft;
@@ -72,7 +69,10 @@ const loop = setInterval(() => {
             //CÓDIGO PARA TORNAR VISÍVEL O BOTÃO DE REINICIAR O JOGO
             restartButton.style.visibility = 'visible';
 
-            clearInterval(loop);
+            playing = false;
+
+            clearTimeout(loop);
+            clearTimeout(scoreCounter);
         } else if(score > 10 && score < 30){
             //LINHAS DE CÓDIGO COM O OBJETIVO DE DESATIVAR A POKEBOLA ATUAL E SUBSTUIR PELA SUBSEQUENTE
             pokeball.style.animation = 'none';
@@ -85,14 +85,26 @@ const loop = setInterval(() => {
             ultraball.style.visibility = 'hidden';
             masterball.style.animation = 'turn 0.7s linear infinite';
             masterball.style.visibility = 'visible';
-        }           
-    }, 10);
-}, 1000);
+        }
+    };
+    collision();
+}
+loop();
 
 //CÓDIGO IMPLEMENTADO COM O OBJETIVO DE REINICIAR O JOGO
 const restartGame = () =>{
     window.location.reload();
 }
+
+//CÓDIGO PARA DESATIVAR AS TECLAS ALT E F12
+document.addEventListener("keydown", function(press) {
+    if (press.key === "Alt" || press.key === "F12") {
+        press.preventDefault(); 
+    }
+  });
+
+//CÓDIGO PARA O POKÉMON REALIZAR A MECÂNICA DE PULO
+document.addEventListener('keydown', jump);
 
 //CASO SEJA APERTADO O "F5" VOLTA PARA A TELA DA CAPA DO JOGO
 document.addEventListener('keydown', function(press){
@@ -102,6 +114,6 @@ document.addEventListener('keydown', function(press){
 })
 
 //FUNÇAO PARA SAIR DA CAPA DO JOGO E IR PARA O JOGO
-const start = () => { 
+function start(){ 
     window.location.href = "game.html";
 }
