@@ -114,6 +114,6 @@ document.addEventListener('keydown', function(press){
 })
 
 //CÓDIGO PARA SAIR DA CAPA DO JOGO E IR PARA O JOGO
-const start = () => { 
+function start(){ 
     window.location.href = "game.html";
 }
